@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ecc39ceb549edd458a9607d3d5d0f89, type: 3}
+  m_Name: EchoConfig
+  m_EditorClassIdentifier: 
+  maxEchoCount: 3
+  echoCreateAllowedOnlyWhenGrounded: 1
+  echoHeightOffset: {x: 0, y: 0, z: 0}
+  echoLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  useFiniteEchoLifetime: 0
+  echoLifetimeSeconds: 0
+  swapCooldownSeconds: 1.5
+  allowSwapInAir: 0
+  allowSwapWhileFalling: 0
+  allowSwapDuringInteraction: 0
+  failFeedbackDuration: 1.25

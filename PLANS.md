@@ -13,9 +13,13 @@
 - Установлен Unity Hub в `C:\Program Files\Unity Hub`.
 - Unity `2022.3.75f1` также была установлена для проверки, но не используется: это Extended LTS, требующий Unity Industry/Enterprise.
 - Автоматическая сборка выполняется через `D:\Unity\2022.3.53f1\Editor\Unity.exe`.
-- Последняя проверка этапа 1 завершилась успешно: `Builds/Windows/EchoPuzzleGame.exe`.
+- Последняя проверка этапа 5 завершилась успешно: `Builds/Windows/EchoPuzzleGame.exe`.
 - Базовая архитектура и ScriptableObject-конфиги добавлены.
-- Реализация player controller, эхо-системы, интерактивных объектов, UI и тестов отсутствует.
+- Базовый player controller и тестовая сцена добавлены.
+- Система создания и хранения эхо добавлена.
+- Система выбора активного эхо добавлена.
+- Swap-механика добавлена.
+- Реализация интерактивных объектов, UI и тестов отсутствует.
 
 ## Базовые продуктовые решения
 
@@ -106,19 +110,19 @@ Assets/Scripts/Data/LevelGoalConfig.cs
 
 ## Этап 2. Контроллер игрока
 
-Статус: не начато.
+Статус: завершено.
 
 Задачи:
 
-- [ ] Создать `PlayerInputHandler`.
-- [ ] Создать `PlayerController`.
-- [ ] Создать `GroundChecker`.
-- [ ] Реализовать движение по `X/Z`.
-- [ ] Реализовать поворот камеры/персонажа.
-- [ ] Предусмотреть прыжок архитектурно, даже если он выключен в прототипе.
-- [ ] Реализовать проверку `Grounded`.
-- [ ] Подключить рестарт уровня по `R`.
-- [ ] Собрать временный player prefab.
+- [x] Создать `PlayerInputHandler`.
+- [x] Создать `PlayerController`.
+- [x] Создать `GroundChecker`.
+- [x] Реализовать движение по `X/Z`.
+- [x] Реализовать поворот камеры/персонажа.
+- [x] Предусмотреть прыжок архитектурно, даже если он выключен в прототипе.
+- [x] Реализовать проверку `Grounded`.
+- [x] Подключить рестарт уровня по `R`.
+- [x] Собрать временный player prefab.
 
 Ожидаемые файлы:
 
@@ -135,21 +139,29 @@ Assets/Prefabs/Characters/Player.prefab
 - Коллизии, рампы и grounded-состояние работают предсказуемо.
 - Есть единая точка для запрета действий в воздухе.
 
+Итоговая проверка:
+
+- Создан `Assets/Prefabs/Characters/Player.prefab`.
+- Создан `Assets/ScriptableObjects/Configs/PlayerConfig.asset`.
+- `Test_Playground` содержит `GameBootstrap`, игрока, камеру, свет, землю и тестовую рампу.
+- Batchmode-сборка через `D:\Unity\2022.3.53f1\Editor\Unity.exe` завершилась с `Build Finished, Result: Success`.
+- Артефакт сборки создан: `Builds/Windows/EchoPuzzleGame.exe`.
+
 ## Этап 3. Создание и хранение эхо
 
-Статус: не начато.
+Статус: завершено.
 
 Задачи:
 
-- [ ] Создать `EchoInstance`.
-- [ ] Создать `EchoManager`.
-- [ ] Создать `EchoVisual`.
-- [ ] Создать prefab эхо.
-- [ ] Создать эхо по кнопке `Q`.
-- [ ] Сохранять позицию, поворот, индекс, id, статус активности и время создания.
-- [ ] Соблюдать `maxEchoCount`.
-- [ ] При достижении лимита блокировать создание и отправлять feedback-событие.
-- [ ] Проверять `echoCreateAllowedOnlyWhenGrounded`.
+- [x] Создать `EchoInstance`.
+- [x] Создать `EchoManager`.
+- [x] Создать `EchoVisual`.
+- [x] Создать prefab эхо.
+- [x] Создать эхо по кнопке `Q`.
+- [x] Сохранять позицию, поворот, индекс, id, статус активности и время создания.
+- [x] Соблюдать `maxEchoCount`.
+- [x] При достижении лимита блокировать создание и отправлять feedback-событие.
+- [x] Проверять `echoCreateAllowedOnlyWhenGrounded`.
 
 Ожидаемые файлы:
 
@@ -166,20 +178,29 @@ Assets/Prefabs/Echo/Echo.prefab
 - Эхо отображаются в мире как читаемые полупрозрачные копии/маркеры.
 - Список эхо остается согласованным после рестарта.
 
+Итоговая проверка:
+
+- Создан `Assets/ScriptableObjects/Configs/EchoConfig.asset`.
+- Создан `Assets/Prefabs/Echo/Echo.prefab`.
+- Создан `Assets/Art/Materials/EchoGhost.mat`.
+- `Test_Playground` содержит `EchoManager`, связанный с игроком, `EchoConfig` и prefab эхо.
+- Batchmode-сборка через `D:\Unity\2022.3.53f1\Editor\Unity.exe` завершилась с `Build Finished, Result: Success`.
+- Артефакт сборки создан: `Builds/Windows/EchoPuzzleGame.exe`.
+
 ## Этап 4. Выбор активного эхо
 
-Статус: не начато.
+Статус: завершено.
 
 Задачи:
 
-- [ ] Создать `EchoSelectionController`.
-- [ ] Ввести состояние `ActiveEcho`.
-- [ ] Реализовать циклическое переключение по `Tab`.
-- [ ] Реализовать переключение колесом мыши, если это не конфликтует с камерой.
-- [ ] Автоматически выбирать доступное эхо после удаления активного.
-- [ ] Устанавливать `null`, если эхо отсутствуют.
-- [ ] Добавить визуальное выделение активного эхо.
-- [ ] Создать событие `OnActiveEchoChanged`.
+- [x] Создать `EchoSelectionController`.
+- [x] Ввести состояние `ActiveEcho`.
+- [x] Реализовать циклическое переключение по `Tab`.
+- [x] Реализовать переключение колесом мыши, если это не конфликтует с камерой.
+- [x] Автоматически выбирать доступное эхо после удаления активного.
+- [x] Устанавливать `null`, если эхо отсутствуют.
+- [x] Добавить визуальное выделение активного эхо.
+- [x] Создать событие `OnActiveEchoChanged`.
 
 Ожидаемые файлы:
 
@@ -192,23 +213,31 @@ Assets/Scripts/Echo/EchoSelectionController.cs
 - Игрок явно понимает, с каким эхо будет выполнен swap.
 - Система корректно работает при 0, 1 и нескольких эхо.
 
+Итоговая проверка:
+
+- Создан `Assets/Scripts/Echo/EchoSelectionController.cs`.
+- `PlayerInputHandler` поддерживает переключение активного эхо по `Tab` и колесу мыши.
+- `Test_Playground` содержит `EchoSelectionController` на объекте `EchoManager`.
+- Batchmode-сборка через `D:\Unity\2022.3.53f1\Editor\Unity.exe` завершилась с `Build Finished, Result: Success`.
+- Артефакт сборки создан: `Builds/Windows/EchoPuzzleGame.exe`.
+
 ## Этап 5. Swap-механика
 
-Статус: не начато.
+Статус: завершено.
 
 Задачи:
 
-- [ ] Создать `EchoSwapController` или `SwapService`.
-- [ ] Выполнять swap по `E`.
-- [ ] Проверять наличие активного эхо.
-- [ ] Проверять cooldown.
-- [ ] Проверять состояние игрока.
-- [ ] Проверять валидность позиции игрока после swap.
-- [ ] Проверять валидность позиции эхо после swap.
-- [ ] Реализовать атомарный обмен позициями.
-- [ ] Запускать cooldown после успешного swap.
-- [ ] Отправлять события `OnSwapStarted`, `OnSwapCompleted`, `OnSwapFailed`.
-- [ ] Добавить базовый VFX/SFX hook без жесткой зависимости gameplay-кода от эффектов.
+- [x] Создать `EchoSwapController` или `SwapService`.
+- [x] Выполнять swap по `E`.
+- [x] Проверять наличие активного эхо.
+- [x] Проверять cooldown.
+- [x] Проверять состояние игрока.
+- [x] Проверять валидность позиции игрока после swap.
+- [x] Проверять валидность позиции эхо после swap.
+- [x] Реализовать атомарный обмен позициями.
+- [x] Запускать cooldown после успешного swap.
+- [x] Отправлять события `OnSwapStarted`, `OnSwapCompleted`, `OnSwapFailed`.
+- [x] Добавить базовый VFX/SFX hook без жесткой зависимости gameplay-кода от эффектов.
 
 Ожидаемые файлы:
 
@@ -221,6 +250,17 @@ Assets/Scripts/Echo/EchoSwapController.cs
 - Swap работает как обмен, а не телепортация.
 - Повторный swap с тем же эхо работает стабильно.
 - Невалидные действия не ломают состояние.
+
+Итоговая проверка:
+
+- Создан `Assets/Scripts/Echo/EchoSwapController.cs`.
+- Создан `Assets/Scripts/Echo/EchoSwapFailureReason.cs`.
+- `PlayerInputHandler` поддерживает swap по `E`.
+- `EchoInstance` обновляет сохраненную позицию после swap.
+- `PlayerController` предоставляет безопасный `WarpTo` для перемещения через `CharacterController`.
+- `Test_Playground` содержит `EchoSwapController` на объекте `EchoManager`.
+- Batchmode-сборка через `D:\Unity\2022.3.53f1\Editor\Unity.exe` завершилась с `Build Finished, Result: Success`.
+- Артефакт сборки создан: `Builds/Windows/EchoPuzzleGame.exe`.
 
 ## Этап 6. Интерактивные объекты уровня
 
